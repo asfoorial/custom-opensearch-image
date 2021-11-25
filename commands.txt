@@ -1,0 +1,8 @@
+oc login -u developer -p developer https://api.crc.testing:6443
+oc new-project os
+oc new-build https://github.com/asfoorial/custom-opensearch-image
+oc new-app custom-opensearch-image --as-deployment-config --name custom-opensearch-app
+oc logs -f build/custom-opensearch-image-1
+oc expose dc/custom-opensearch-app --port=9200
+oc logs custom-opensearch-app-1-deploy
+#create a route
