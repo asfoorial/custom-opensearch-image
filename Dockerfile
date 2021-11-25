@@ -13,6 +13,8 @@ RUN adduser osuser -g opensearch -G 0 -d /usr/share/opensearch
 WORKDIR /usr/share/opensearch/opensearch-1.2.0
 COPY install.sh /usr/share/opensearch/opensearch-1.2.0/
 COPY start.sh /usr/share/opensearch/opensearch-1.2.0/
+RUN chown -R osuser /usr/share/opensearch
+RUN chmod -R 777 /usr/share/opensearch
 #RUN yum update -y
 #RUN yum install -y python3
 #RUN pip3.6 install --upgrade pip
@@ -24,7 +26,6 @@ RUN /usr/share/opensearch/opensearch-1.2.0/install.sh
 #CMD ["/usr/share/opensearch/opensearch-1.2.0/install.sh"]
 #CMD ["/usr/share/opensearch/opensearch-1.2.0/install.sh"]
 COPY opensearch.yml /usr/share/opensearch/opensearch-1.2.0/config
-RUN chown -R osuser /usr/share/opensearch
-RUN chmod -R 777 /usr/share/opensearch
+
 USER osuser
 ENTRYPOINT /usr/share/opensearch/opensearch-1.2.0/start.sh
