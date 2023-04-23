@@ -1,0 +1,8 @@
+oc login -u developer -p developer https://api.crc.testing:6443
+oc new-project os
+oc new-build https://github.com/asfoorial/custom-opensearch-image
+oc new-app --image-stream custom-opensearch-image --name osapp
+oc expose deployment osapp --port=9200 --target-port=9200
+oc expose svc/osapp
+
+Now go to the console and open the route url
